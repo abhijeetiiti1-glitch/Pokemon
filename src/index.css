@@ -493,3 +493,68 @@ pokemon-info {
     grid-template-columns: 60px 1fr 30px;
   }
 }
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+@media (max-width: 480px) {
+  .pokemon-card {
+    width: 100%;
+    min-height: 320px;
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pokemon-image {
+    width: 120px;
+    height: 120px;
+  }
+}
+@media (max-width: 480px) {
+  .pokemon-name {
+    font-size: 2.2rem;
+    margin-top: 1.2rem;
+  }
+
+  .pokemon-id {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .pokemon-search input {
+    width: 100%;
+    font-size: 1.6rem;
+    padding: 10px 14px;
+  }
+}
+@media (max-width: 480px) {
+  .card-back {
+    padding: 1rem;
+  }
+
+  .stats-title {
+    font-size: 1.1rem;
+  }
+
+  .stat-row {
+    grid-template-columns: 55px 1fr 30px;
+    font-size: 0.75rem;
+  }
+}
+@media (max-width: 480px) {
+  .load-more button {
+    width: 90%;
+    font-size: 1.6rem;
+    padding: 14px;
+  }
+}
