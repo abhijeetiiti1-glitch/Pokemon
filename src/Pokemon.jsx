@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
 import PokemonCards from './PokemonCards';
-
+import GradientText from './GradientText'
 const Pokemon = () => {
   const [pokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +9,7 @@ const Pokemon = () => {
   const [search, setSearchTerm] = useState("");
   const [visible, setVisible] = useState(12);
 
-  const API = "https://pokeapi.co/api/v2/pokemon?limit=951";
+  const API = "https://pokeapi.co/api/v2/pokemon?limit=1151";
 
   const fetchPokemon = async () => {
     try {
@@ -53,7 +53,15 @@ const Pokemon = () => {
 
   return (
     <section className="container">
-      <h1 className="title">Pokédex</h1>
+      <h1 className="title font-bold">  
+<GradientText
+  colors={["#cf1b1b", "#da8907", "#40ffaa", "#fffc40", "#ff7340"]}
+  animationSpeed={3}
+  showBorder={false}
+  className="custom-class"
+>
+  Pokedex
+</GradientText></h1>
 
       <div className="pokemon-search">
         <input

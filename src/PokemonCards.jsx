@@ -29,14 +29,29 @@ const PokemonCards = ({ pokemonData }) => {
           <span className="pokemon-id">#{pokemonData?.id}</span>
         </div>
 
-        <div className="card-back">
-          <h4 className=''>Stats</h4>
-          <p>
-            {pokemonData?.stats
-              ?.map((stat) => `${stat.stat.name}: ${stat.base_stat}`)
-              .join(', ')}
-          </p>
+       <div className="card-back">
+  <h4 className="stats-title">Base Stats</h4>
+
+  <div className="stats">
+    {pokemonData?.stats?.map((stat) => (
+      <div className="stat-row" key={stat.stat.name}>
+        <span className="stat-name">
+          {stat.stat.name.replace("-", " ")}
+        </span>
+
+        <div className="stat-bar">
+          <div
+            className={`stat-fill ${stat.stat.name}`}
+            style={{ width: `${Math.min(stat.base_stat, 100)}%` }}
+          ></div>
         </div>
+
+        <span className="stat-value">{stat.base_stat}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
 
       </div>
     </li>
