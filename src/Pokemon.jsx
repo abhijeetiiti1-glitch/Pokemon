@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
 import PokemonCards from './PokemonCards';
 
@@ -5,48 +6,84 @@ const Pokemon = () => {
   const [pokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [search, setSearchTerm] = useState("");
+  const [visible, setVisible] = useState(12);
 
-  const API = "https://pokeapi.co/api/v2/pokemon?limit=150";
+  const API = "https://pokeapi.co/api/v2/pokemon?limit=351";
 
   const fetchPokemon = async () => {
     try {
       const response = await fetch(API);
       const data = await response.json();
 
-      const detailPokemonData = data.results.map(async (curPokemon) => {
-        const res = await fetch(curPokemon.url);
-        return await res.json();
-      });
+      const detailedPokemon = await Promise.all(
+        data.results.map(async (curPokemon) => {
+          const res = await fetch(curPokemon.url);
+          return await res.json();
+        })
+      );
 
-      const detailedResponse = await Promise.all(detailPokemonData);
-      setPokemon(detailedResponse);
+      setPokemon(detailedPokemon);
       setLoading(false);
-    } catch (error) {
-      console.error("Error fetching Pokémon data:", error);
-      setError(error);
+    } catch (err) {
+      setError(err);
       setLoading(false);
     }
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchPokemon();
   }, []);
 
-  if (loading) return <h2>Loading...</h2>;
-  if (error) return <h2>Error: {error.message}</h2>;
+  const searchData = pokemon.filter((item) => {
+    const searchValue = search.toLowerCase().trim();
+
+    return (
+      item.name.toLowerCase().includes(searchValue) ||
+      item.id.toString() === searchValue ||
+      `#${item.id}` === searchValue
+    );
+  });
+
+  const visiblePokemon = searchData.slice(0, visible);
+
+  if (loading) return <h2 className="status">Loading Pokédex...</h2>;
+  if (error) return <h2 className="status">Error: {error.message}</h2>;
 
   return (
     <section className="container">
-      <h1>Pokédex</h1>
+      <h1 className="title">Pokédex</h1>
 
+      <div className="pokemon-search">
+        <input
+          type="text"
+          placeholder="Search Pokémon..."
+          value={search}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setVisible(12);
+             `#${item.id}` 
+          }}
+        />
+      </div>
       <ul className="cards">
-        {pokemon.map((curPokemon) => (
+        {visiblePokemon.map((curPokemon) => (
           <PokemonCards
             key={curPokemon.id}
             pokemonData={curPokemon}
           />
         ))}
       </ul>
+
+ 
+      {visible < searchData.length && (
+        <div className="load-more">
+          <button onClick={() => setVisible(prev => prev + 16)}>
+            Load More
+          </button>
+        </div>
+      )}
     </section>
   );
 };
