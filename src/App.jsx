@@ -1,7 +1,8 @@
 import React from 'react'
 import Pokemon from './Pokemon'
 import './App.css'
-import Tedxfooter from './Tedxfooter'
+
+import Tedxfooter from './TedxFooter.jsx'
 function App() {
  
 
