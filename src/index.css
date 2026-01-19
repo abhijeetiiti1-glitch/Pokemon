@@ -558,3 +558,9 @@ pokemon-info {
     padding: 14px;
   }
 }
+.status {
+  font-size: larger;
+  margin-bottom: 1rem;
+  color: white;
+  font-weight: bold;
+}
