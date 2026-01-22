@@ -9,7 +9,7 @@ const Pokemon = () => {
   const [search, setSearchTerm] = useState("");
   const [visible, setVisible] = useState(8);
 
-  const API = "https://pokeapi.co/api/v2/pokemon?limit=400";
+  const API = "https://pokeapi.co/api/v2/pokemon?limit=1100";
 
   const fetchPokemon = async () => {
     try {
