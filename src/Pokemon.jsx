@@ -7,9 +7,9 @@ const Pokemon = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [search, setSearchTerm] = useState("");
-  const [visible, setVisible] = useState(12);
+  const [visible, setVisible] = useState(8);
 
-  const API = "https://pokeapi.co/api/v2/pokemon?limit=1000";
+  const API = "https://pokeapi.co/api/v2/pokemon?limit=400";
 
   const fetchPokemon = async () => {
     try {
@@ -60,7 +60,7 @@ const Pokemon = () => {
   showBorder={false}
   className="custom-class"
 >
-  Pokedex
+ Pokédex
 </GradientText></h1>
 
       <div className="pokemon-search">
